@@ -47,20 +47,24 @@ class Formulario extends React.Component {
         //componente enviado para o APP.js
         return (
             <div>
-                <input 
-                value={this.state.inputUsuario}
-                onChange={this.onChangeUsuario}
-                placeholder={'Usuário'}
-                />
 
-                <input
-                value={this.state.inputMensagem}
-                onChange={this.onChangeMensagem}
-                placeholder={'Mensagem'}
-                />
+                <h3>{listaDeComentarios}</h3>
 
-               <button onClick={this.enviarComentario}>Enviar</button>
-               {listaDeComentarios}
+                <div>
+                    <input 
+                    value={this.state.inputUsuario}
+                    onChange={this.onChangeUsuario}
+                    placeholder={'Usuário'}
+                    />
+
+                    <input
+                    value={this.state.inputMensagem}
+                    onChange={this.onChangeMensagem}
+                    placeholder={'Mensagem'}
+                    />
+
+                    <button onClick={this.enviarComentario}>Enviar</button>
+                </div>
             </div>
         )
     }
