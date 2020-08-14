@@ -1,5 +1,5 @@
 import React from 'react'
-
+import styled from 'styled-components'
 
 class Formulario extends React.Component {
     state = {
@@ -22,6 +22,7 @@ class Formulario extends React.Component {
     enviarComentario = () => {
         //criando novo objeto
         const novoComentario = {
+            
             usuario: this.state.inputUsuario,
             mensagem: this.state.inputMensagem
         }
@@ -39,25 +40,23 @@ class Formulario extends React.Component {
         const listaDeComentarios = this.state.comentarios
         .map((comentario)=> {
             return (
-                <p>{comentario.usuario}: {comentario.mensagem}</p>
+                <p>{comentario.usuario} {comentario.mensagem}</p>
+                
             )
         })
 
 
         //componente enviado para o APP.js
         return (
-            <div>
-
-                <h3>{listaDeComentarios}</h3>
-
-                <div>
+            <Contanier>
+                <div /*onSubmit={this.enviarComentario}*/>
                     <input 
                     value={this.state.inputUsuario}
                     onChange={this.onChangeUsuario}
                     placeholder={'Usuário'}
                     />
 
-                    <input
+                    <input 
                     value={this.state.inputMensagem}
                     onChange={this.onChangeMensagem}
                     placeholder={'Mensagem'}
@@ -65,9 +64,23 @@ class Formulario extends React.Component {
 
                     <button onClick={this.enviarComentario}>Enviar</button>
                 </div>
-            </div>
+                    <h3>{listaDeComentarios}</h3>
+            
+                  
+                </Contanier>
         )
     }
 }
 
 export default Formulario
+
+
+const Contanier = styled.div `
+border: 1px solid black; 
+height: 100vh;
+width: 40vw;
+padding: 10px;
+margin: 0 auto;
+display: flex;
+flex-direction: column-reverse;
+`
