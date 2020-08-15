@@ -19,7 +19,9 @@ class Formulario extends React.Component {
     }
 
     //cria um novo objeto e adiciona no array de comentarios
-    enviarComentario = () => {
+    enviarComentario = (event) => {
+
+        event.preventDefault()
         //criando novo objeto
         const novoComentario = {
             
@@ -34,22 +36,37 @@ class Formulario extends React.Component {
         this.setState({inputUsuario: ''})
         this.setState({inputMensagem: ''})
     }
+    apagarComentario = (event) => {
+        const dados = event.target.innerHTML
+        const dados2 = dados.split('_')
+        const array = this.state.comentarios.filter((obj)=>{
+           if(obj.usuario === dados2[0] && obj.mensagem === dados2[1]){
+               return false
+           } else {
+               return true
+           }
+       })
 
+       this.setState({comentarios: array})
+
+    } 
+    
 
     render(){
+        
         const listaDeComentarios = this.state.comentarios
         .map((comentario)=> {
             return (
-                <p>{comentario.usuario} {comentario.mensagem}</p>
+                <p onDoubleClick={this.apagarComentario}>{comentario.usuario}_{comentario.mensagem}</p>
                 
-            )
-        })
-
+                )
+            })
+                       
 
         //componente enviado para o APP.js
         return (
             <Contanier>
-                <div /*onSubmit={this.enviarComentario}*/>
+                <form onSubmit={this.enviarComentario}>
                     <input 
                     value={this.state.inputUsuario}
                     onChange={this.onChangeUsuario}
@@ -62,8 +79,8 @@ class Formulario extends React.Component {
                     placeholder={'Mensagem'}
                     />
 
-                    <button onClick={this.enviarComentario}>Enviar</button>
-                </div>
+                    <button type={'submit'} onClick={this.enviarComentario}>Enviar</button>
+                </form>
                     <h3>{listaDeComentarios}</h3>
             
                   
